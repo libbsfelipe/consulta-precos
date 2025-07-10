@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model tbl_eCommerces_monitor_b2c {
+  id      Int    @id(map: "PK__tbl_eCom__3213E83F90FAA9B6") @default(autoincrement())
+  store   String @db.VarChar(50)
+  baseUrl String @db.VarChar(200)
+}
+
+model tbl_historyOffers_monitor_b2c {
+  id        Int      @id(map: "PK__tbl_hist__3213E83F5A41F17E") @default(autoincrement())
+  storeId   Int?
+  ean       String?  @db.VarChar(13)
+  timestamp DateTime @db.DateTime
+  price     Decimal  @db.Decimal(13, 5)
+}
+
+model tbl_products_monitor_b2c {
+  ean              String  @id(map: "PK__tbl_prod__D950DE717746C343") @db.VarChar(13)
+  productName      String  @db.VarChar(200)
+  productImagePath String? @db.VarChar(700)
+  productImageName String? @db.VarChar(200)
+}
+
+model tbl_access_monitor_b2c {
+  id     Int    @id(map: "PK__tbl_acce__3213E83FD5FDDBB7") @default(autoincrement())
+  access String @db.VarChar(60)
+}
+
+model tbl_navigation_option_monitor_b2c {
+  id        Int    @id(map: "PK__tbl_navi__3213E83FF540775C") @default(autoincrement())
+  title     String @db.VarChar(60)
+  route     String @db.VarChar(200)
+  component String @db.VarChar(60)
+  accessId  Int?
+}
+
+model tbl_user_access_monitor_b2c {
+  id       Int    @id(map: "PK__tbl_user__3213E83FCBE9114A") @default(autoincrement())
+  email    String @db.VarChar(60)
+  accessId Int?
+}
